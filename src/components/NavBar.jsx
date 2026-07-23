@@ -100,13 +100,13 @@ export default function NavBar({ isHovered, setIsHovered, isOpen, setIsOpen }) {
                                     </p>
                                 </Link>
 
-                                <span>
+                                <Link to="/InfoPage">
                                     <h1 className="font-puff">Info</h1>
                                     <p className="text-[#FFE6D4] text-sm font-light mt-1 font-[cursive]">
                                         Get to know about <br />
                                         all the music and artists
                                     </p>
-                                </span>
+                                </Link>
 
                             </div>
 
