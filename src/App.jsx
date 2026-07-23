@@ -5,6 +5,7 @@ import MyFooter from "./components/MyFooter";
 import HomePage from "./components/HomePage";
 import SyncPage from "./components/SyncPage";
 import InfoPage from "./components/InfoPage";
+import AboutPage from "./components/AboutPage";
 
 export default function App() {
   const [isHovered, setIsHovered] = useState(false);
@@ -12,7 +13,7 @@ export default function App() {
 
   return (
     <Router>
-      <div className="min-h-screen flex flex-col">
+      <div className="flex min-h-screen flex-col">
         <NavBar
           isHovered={isHovered}
           setIsHovered={setIsHovered}
@@ -33,6 +34,7 @@ export default function App() {
             />
             <Route path="/SyncPage" element={<SyncPage />} />
             <Route path="/InfoPage" element={<InfoPage />} />
+            <Route path="/about" element={<AboutPage />} />
           </Routes>
         </main>
 

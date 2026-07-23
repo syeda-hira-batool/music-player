@@ -105,18 +105,24 @@ export default function InfoPage() {
     };
 
     return (
-        /* Increased top padding to pt-36 to bring everything lower down */
-        <div className="min-h-screen p-6 pt-36 flex flex-col items-center gap-8">
+        /* Decreased top padding to pt-12 and gap to gap-6 to bring everything higher */
+        <div className="p-6 pt-3 flex flex-col items-center gap-5">
 
-            {/* Row container placing Cat 1 on the left, Form in the middle, Cat 2 on the right */}
-            <div className="flex flex-row items-center justify-center gap-4 w-full max-w-2xl">
-                
+            <div className="flex flex-col items-center justify-center w-full max-w-2xl">
 
                 <form
                     onSubmit={handleSubmit}
-                    className="flex flex-col items-center gap-3 w-full max-w-md"
+                    className="flex flex-col items-center gap-3 w-full"
                 >
-                    <div className="flex gap-2 text-sm">
+                    {/* Dancing cat placed above the mode buttons */}
+                    <img
+                        src={catDance2Gif}
+                        alt="Dancing cat"
+                        className="w-20 sm:w-24 object-contain"
+                    />
+
+                    {/* Mode buttons */}
+                    <div className="flex gap-2 text-sm justify-center">
                         <button
                             type="button"
                             onClick={() => setMode("artist")}
@@ -141,7 +147,8 @@ export default function InfoPage() {
                         </button>
                     </div>
 
-                    <div className="flex flex-wrap justify-center gap-2 w-full">
+                    {/* Inputs centered in a responsive row */}
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-2 w-full">
                         <label htmlFor="search" className="sr-only">
                             Search
                         </label>
@@ -156,7 +163,7 @@ export default function InfoPage() {
                                     value={artist}
                                     onChange={(e) => setArtist(e.target.value)}
                                     placeholder="Artist name..."
-                                    className="px-3 py-1 rounded-full text-[#FFE6D4] focus:outline-none bg-[#CD2C58]"
+                                    className="px-3 py-1 rounded-full text-[#FFE6D4] focus:outline-none bg-[#CD2C58] text-center w-full sm:w-auto"
                                 />
                             </>
                         )}
@@ -166,22 +173,19 @@ export default function InfoPage() {
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                             placeholder={mode === "artist" ? "Search an artist..." : "Song title..."}
-                            className="px-3 py-1 rounded-full text-[#FFE6D4] focus:outline-none bg-[#CD2C58]"
+                            className="px-3 py-1 rounded-full text-[#FFE6D4] focus:outline-none bg-[#CD2C58] text-center w-full sm:w-auto"
                         />
-                        <button
-                            type="submit"
-                            className="bg-[#CD2C58] text-[#FFE6D4] px-4 py-1 rounded-full"
-                        >
-                            Search
-                        </button>
                     </div>
+
+                    {/* Submit Button cleanly centered underneath */}
+                    <button
+                        type="submit"
+                        className="bg-[#CD2C58] text-[#FFE6D4] px-4 py-1 rounded-full"
+                    >
+                        Search
+                    </button>
                 </form>
 
-                <img
-                    src={catDance2Gif}
-                    alt="Right dancing cat"
-                    className="w-20 sm:w-24 object-contain"
-                />
             </div>
 
             <div className="w-full flex justify-center">
