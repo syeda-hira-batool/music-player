@@ -63,7 +63,7 @@ export default function AboutPage() {
                 {concepts.map((concept) => (
                     <div
                         key={concept.title}
-                        className="bg-white/50 rounded-2xl p-6 text-left"
+                        className="bg-white/50 rounded-2xl p-6 text-left transition-all duration-300 ease-in-out hover:bg-white/80 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#CD2C58]/20"
                     >
                         <h2 className="text-[#CD2C58] font-puff font-bold text-xl pb-2">
                             {concept.title}
