@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import MyFooter from "./components/MyFooter";
 import HomePage from "./components/HomePage";
+import SyncPage from "./components/SyncPage";
 
 export default function App() {
   const [isHovered, setIsHovered] = useState(false);
@@ -10,32 +11,31 @@ export default function App() {
 
   return (
     <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div className="min-h-screen flex flex-col">
-              <NavBar
-                isHovered={isHovered}
-                setIsHovered={setIsHovered}
-                isOpen={isOpen}
-                setIsOpen={setIsOpen}
-              />
+      <div className="min-h-screen flex flex-col">
+        <NavBar
+          isHovered={isHovered}
+          setIsHovered={setIsHovered}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
 
-              <main className="flex-1">
-
+        <main className="flex-1">
+          <Routes>
+            <Route
+              path="/"
+              element={
                 <HomePage
                   isHovered={isHovered}
                   isOpen={isOpen}
                 />
+              }
+            />
+            <Route path="/SyncPage" element={<SyncPage />} />
+          </Routes>
+        </main>
 
-              </main>
-
-              <MyFooter />
-            </div>
-          }
-        />
-      </Routes>
+        <MyFooter />
+      </div>
     </Router>
   );
 }

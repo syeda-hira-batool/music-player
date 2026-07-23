@@ -92,13 +92,13 @@ export default function NavBar({ isHovered, setIsHovered, isOpen, setIsOpen }) {
                                     </p>
                                 </Link>
 
-                                <span>
+                                <Link to="/SyncPage">
                                     <h1 className="font-puff">Sync</h1>
                                     <p className="text-[#FFE6D4] text-sm font-light mt-1 font-[cursive]">
                                         Enjoy music with <br />
                                         your friends
                                     </p>
-                                </span>
+                                </Link>
 
                                 <span>
                                     <h1 className="font-puff">Info</h1>
