@@ -137,7 +137,6 @@ export default function DreamPage() {
     return (
         <div className="relative min-h-screen overflow-hidden">
 
-
             <style>{`
                 .dream-progress {
                     -webkit-appearance: none;
@@ -184,19 +183,33 @@ export default function DreamPage() {
                 }
             `}</style>
 
+            {/* Background Video */}
 
-            <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover"
-            >
-                <source
-                    src={dreamBackground}
-                    type="video/mp4"
-                />
-            </video>
+            <div className="absolute inset-0 overflow-hidden bg-black">
+
+                {/* Blurred fill layer — masks the edges, no visible pixelation */}
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover scale-110 blur-3xl opacity-60"
+                >
+                    <source src={dreamBackground} type="video/mp4" />
+                </video>
+
+                {/* Sharp foreground layer — never stretched past its native size */}
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-contain"
+                >
+                    <source src={dreamBackground} type="video/mp4" />
+                </video>
+
+            </div>
 
             <PixelDust />
 
@@ -471,7 +484,7 @@ export default function DreamPage() {
                 hover:opacity-100
                 "
             >
-                ← Exit Dreaminess
+                ← Exit the mode
             </button>
 
 

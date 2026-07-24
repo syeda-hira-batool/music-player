@@ -491,7 +491,7 @@ export default function ComfortPage() {
                 hover:opacity-100
                 "
             >
-                ← Exit Comfort
+               ← Exit the mode
             </button>
 
 

@@ -1,11 +1,19 @@
+/* Import Google Fonts at the top */
+@import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Say&display=swap');
+
 @import "tailwindcss";
+
 @theme {
-    --font-puff: "DynaPuff", sans-serif;
-    --font-CormorantGaramond: "Cormorant Garamond", sans-serif;
+    --font-puff: "DynaPuff", cursive;
+    --font-CormorantGaramond: "Cormorant Garamond", serif;
     --font-Fredoka: "Fredoka", sans-serif;
     --font-QuickSand: "Quicksand", sans-serif;
-    --font-SadFont: "Nothing You Could Say", sans-serif;
+    --font-Volkhov: "Volkhov"  , sans-serif;
+    
+    /* Wrap font names with spaces in escaped quotes or double quotes */
+    --font-SadFont: '"Nothing You Could Say"', cursive;
 }
-body{
+
+body {
     background: #FFC4C4;
 }

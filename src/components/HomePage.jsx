@@ -1,8 +1,7 @@
 import helloKittyGif from "../assets/Hello_Kitty_Gif.gif";
-
+import danceGif from "../assets/dance.gif"; 
 
 export default function HomePage({ isHovered, isOpen }) {
-
     return (
         <div className="flex flex-col items-center justify-center py-7 px-6">
 
@@ -22,12 +21,16 @@ export default function HomePage({ isHovered, isOpen }) {
             )}
 
             {isOpen && (
-                <div className="text-[#CD2C58] mt-44 text-center font-puff text-2xl">
-                    <p className="text-bold text-6xl">
-                        Click the relevant links to enter:
+                <div className="text-[#CD2C58] mt-40 text-center font-puff text-2xl flex flex-col items-center">
+                    <p className="font-bold text-6xl pb-6">
+                        Click the relevant links above ↑ to enter
                     </p>
 
-                    
+                    <img 
+                        src={danceGif} 
+                        alt="Dancing bunny" 
+                        className="w-40 h-auto mt-4" 
+                    />
                 </div>
             )}
 

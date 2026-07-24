@@ -32,8 +32,8 @@ const isDreamMode = location.pathname === "/DreamPage";
 const isJoyMode = location.pathname === "/JoyPage";
 const isComfortMode = location.pathname === "/ComfortPage";
 const isSadMode = location.pathname === "/SadPage";
-const isPartyMode = location.pathname === "/SadPage";
-const isCozyMode = location.pathname === "/SadPage";
+const isPartyMode = location.pathname === "/PartyPage";
+const isCozyMode = location.pathname === "/CozyPage";
 
 // True if the user is inside any mood mode
 const isMoodMode = isDreamMode || isJoyMode || isComfortMode || isSadMode || isPartyMode || isCozyMode;

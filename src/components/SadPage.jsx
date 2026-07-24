@@ -192,11 +192,7 @@ export default function SadPage() {
             `}</style>
 
 
-            {/* Background Video */}
-
             <div className="absolute inset-0 overflow-hidden bg-black">
-
-                {/* Blurred fill layer — masks the edges, no visible pixelation */}
                 <video
                     autoPlay
                     loop
@@ -207,7 +203,6 @@ export default function SadPage() {
                     <source src={sadBackground} type="video/mp4" />
                 </video>
 
-                {/* Sharp foreground layer — never stretched past its native size */}
                 <video
                     autoPlay
                     loop
@@ -491,7 +486,7 @@ export default function SadPage() {
                 hover:opacity-100
                 "
             >
-                ← Exit Sadness
+                ← Exit the mode
             </button>
 
 
