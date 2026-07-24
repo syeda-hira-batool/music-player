@@ -137,7 +137,6 @@ export default function DreamPage() {
     return (
         <div className="relative min-h-screen overflow-hidden">
 
-            {/* STAR SLIDER THUMB STYLES */}
 
             <style>{`
                 .dream-progress {
@@ -185,7 +184,6 @@ export default function DreamPage() {
                 }
             `}</style>
 
-            {/* Background Video */}
 
             <video
                 autoPlay
@@ -202,7 +200,6 @@ export default function DreamPage() {
 
             <PixelDust />
 
-            {/* AUDIO */}
 
             <audio
                 ref={audioRef}
@@ -217,7 +214,6 @@ export default function DreamPage() {
                 <source src={currentSong.audio} />
             </audio>
 
-            {/* LEFT SIDEBAR */}
 
             <div
                 className={`
@@ -241,7 +237,6 @@ export default function DreamPage() {
                 `}
             >
 
-                {/* ATTACHED PLAYLIST TOGGLE BUTTON */}
 
                 <button
                     onClick={() => setPlaylistOpen(!playlistOpen)}
@@ -312,8 +307,6 @@ export default function DreamPage() {
                 </div>
             </div>
 
-            {/* RIGHT SIDEBAR */}
-
             <div
                 className={`
                 fixed
@@ -335,8 +328,6 @@ export default function DreamPage() {
                 }
                 `}
             >
-
-                {/* ATTACHED PLAYER TOGGLE BUTTON */}
 
                 <button
                     onClick={() => setPlayerOpen(!playerOpen)}
@@ -393,7 +384,6 @@ export default function DreamPage() {
                         {currentSong.artist}
                     </p>
 
-                    {/* PROGRESS */}
 
                     <div className="w-full mt-10">
 
@@ -417,7 +407,6 @@ export default function DreamPage() {
 
                     </div>
 
-                    {/* CONTROLS */}
 
                     <div className="flex items-center justify-center gap-8 mt-10">
 
@@ -463,8 +452,6 @@ export default function DreamPage() {
                 </div>
             </div>
 
-            {/* EXIT BUTTON */}
-
             <button
                 onClick={() => navigate("/")}
                 className="
@@ -487,7 +474,6 @@ export default function DreamPage() {
                 ← Exit Dreaminess
             </button>
 
-            {/* F11 MESSAGE */}
 
             <h2 className="fixed bottom-17 left-8 z-50 text-xs text-white/60 font-CormorantGaramond">
                 Press F11 for better experience
