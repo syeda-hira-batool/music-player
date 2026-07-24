@@ -1,21 +1,23 @@
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 
-import sadBackground from "../assets/joy-background.mp4";
+import sadBackground from "../assets/sad-background.mp4";
 
 import OurSummer from "../assets/OurSummer.mp3";
 import Ghosting from "../assets/Ghosting.mp3";
 import BlueHour from "../assets/BlueHour.mp3";
+import AboutYou from "../assets/AboutYou.mp3";
 
 import OurSummerCover from "../assets/OurSummer.png";
 import GhostingCover from "../assets/Ghosting.jfif";
 import BlueHourCover from "../assets/BlueHour.jfif";
+import AboutYouCover from "../assets/AboutYou.jfif";
 
 import BackButton from "../assets/backButton.png";
 import ForwardButton from "../assets/ForwardButton.png";
 import PauseButton from "../assets/PauseButton.png";
 import PlayButton from "../assets/playButton.png";
-import cd from "../assets/cd.png";
+import cloud from "../assets/cloud.png";
 
 
 const songs = [
@@ -36,6 +38,12 @@ const songs = [
         artist: "Tomorrow X Together",
         audio: BlueHour,
         cover: BlueHourCover,
+    },
+    {
+        title: "About You",
+        artist: "The 1975",
+        audio: AboutYou,
+        cover: AboutYouCover,
     },
 ];
 
@@ -156,7 +164,7 @@ export default function SadPage() {
                     width: 24px;
                     height: 40px;
                     margin-top: -21px;
-                    background-image: url(${cd});
+                    background-image: url(${cloud});
                     background-size: contain;
                     background-repeat: no-repeat;
                     background-position: center;
@@ -173,7 +181,7 @@ export default function SadPage() {
                 .dream-progress::-moz-range-thumb {
                     width: 24px;
                     height: 40px;
-                    background-image: url(${cd});
+                    background-image: url(${cloud});
                     background-size: contain;
                     background-repeat: no-repeat;
                     background-position: center;
@@ -184,20 +192,33 @@ export default function SadPage() {
             `}</style>
 
 
-            <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover"
-            >
-                <source
-                    src={sadBackground}
-                    type="video/mp4"
-                />
-            </video>
+            {/* Background Video */}
 
-            <PixelDust />
+            <div className="absolute inset-0 overflow-hidden bg-black">
+
+                {/* Blurred fill layer — masks the edges, no visible pixelation */}
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover scale-110 blur-3xl opacity-60"
+                >
+                    <source src={sadBackground} type="video/mp4" />
+                </video>
+
+                {/* Sharp foreground layer — never stretched past its native size */}
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-contain"
+                >
+                    <source src={sadBackground} type="video/mp4" />
+                </video>
+
+            </div>
 
 
             <audio
@@ -266,11 +287,11 @@ export default function SadPage() {
 
                 <div className="p-8">
 
-                    <h2 className="text-white text-3xl mb-8 font-CormorantGaramond">
-                        Dream Playlist
+                    <h2 className="text-white text-3xl mb-8 font-SadFont">
+                        Comfort Playlist
                     </h2>
 
-                    <div className="space-y-4 font-CormorantGaramond">
+                    <div className="space-y-4 font-SadFont">
 
                         {songs.map((song, index) => (
                             <button
@@ -291,11 +312,11 @@ export default function SadPage() {
                                 }
                                 `}
                             >
-                                <h3 className="text-white text-lg font-CormorantGaramond">
+                                <h3 className="text-white text-lg font-SadFont">
                                     {song.title}
                                 </h3>
 
-                                <p className="text-white/60 text-sm font-CormorantGaramond">
+                                <p className="text-white/60 text-sm font-SadFont">
                                     {song.artist}
                                 </p>
                             </button>
@@ -357,7 +378,7 @@ export default function SadPage() {
 
                 <div className="flex flex-col items-center p-8">
 
-                    <h2 className="text-white text-3xl font-CormorantGaramond mb-8">
+                    <h2 className="text-white text-3xl font-SadFont mb-8">
                         Now Playing
                     </h2>
 
@@ -375,11 +396,11 @@ export default function SadPage() {
                         "
                     />
 
-                    <h3 className="text-white text-2xl mt-8 font-CormorantGaramond">
+                    <h3 className="text-white text-2xl mt-8 font-SadFont">
                         {currentSong.title}
                     </h3>
 
-                    <p className="text-white/60 mt-2 font-CormorantGaramond">
+                    <p className="text-white/60 mt-2 font-SadFont">
                         {currentSong.artist}
                     </p>
 
@@ -455,7 +476,7 @@ export default function SadPage() {
                 onClick={() => navigate("/")}
                 className="
                 fixed
-                font-CormorantGaramond
+                font-SadFont
                 bottom-6
                 left-6
                 z-50
@@ -470,11 +491,11 @@ export default function SadPage() {
                 hover:opacity-100
                 "
             >
-                ← Exit Dreaminess
+                ← Exit Sadness
             </button>
 
 
-            <h2 className="fixed bottom-17 left-8 z-50 text-xs text-white/60 font-CormorantGaramond">
+            <h2 className="fixed bottom-17 left-8 z-50 text-xs text-white/60 font-SadFont">
                 Press F11 for better experience
             </h2>
 

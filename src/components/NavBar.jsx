@@ -19,16 +19,19 @@ export default function NavBar({ isHovered, setIsHovered, isOpen, setIsOpen }) {
         },
         {
             name: "Party",
+            path: "/PartyPage",
             description:
                 "Perfect if you are in the mood to party and want to feel energetic."
         },
         {
             name: "Sad",
+            path: "/SadPage",
             description:
                 "Perfect for when you are feeling overwhelmed on a rainy day."
         },
         {
             name: "Cozy",
+            path: "/CozyPage",
             description:
                 "Perfect for studying, unwinding, and relaxing."
         },

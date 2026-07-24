@@ -471,7 +471,7 @@ export default function JoyPage() {
                 hover:opacity-100
                 "
             >
-                ← Exit Dreaminess
+                ← Exit Joy
             </button>
 
 

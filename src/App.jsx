@@ -16,6 +16,9 @@ import AboutPage from "./components/AboutPage";
 import DreamPage from "./components/DreamPage";
 import JoyPage from "./components/JoyPage";
 import ComfortPage from "./components/ComfortPage";
+import SadPage from "./components/SadPage";
+import PartyPage from "./components/PartyPage";
+import CozyPage from "./components/CozyPage"
 
 function AppContent() {
 const [isHovered, setIsHovered] = useState(false);
@@ -28,9 +31,12 @@ const navigate = useNavigate();
 const isDreamMode = location.pathname === "/DreamPage";
 const isJoyMode = location.pathname === "/JoyPage";
 const isComfortMode = location.pathname === "/ComfortPage";
+const isSadMode = location.pathname === "/SadPage";
+const isPartyMode = location.pathname === "/SadPage";
+const isCozyMode = location.pathname === "/SadPage";
 
 // True if the user is inside any mood mode
-const isMoodMode = isDreamMode || isJoyMode || isComfortMode;
+const isMoodMode = isDreamMode || isJoyMode || isComfortMode || isSadMode || isPartyMode || isCozyMode;
 
 useEffect(() => {
     if (!isMoodMode) return;
@@ -51,7 +57,6 @@ useEffect(() => {
 return (
     <div className="flex min-h-screen flex-col">
 
-        {/* Show navbar only outside mood mode */}
         {!isMoodMode && (
             <NavBar
                 isHovered={isHovered}
@@ -108,10 +113,21 @@ return (
                     path="/ComfortPage"
                     element={<ComfortPage />}
                 />
+                <Route
+                    path="/SadPage"
+                    element={<SadPage />}
+                />
+                <Route
+                    path="/PartyPage"
+                    element={<PartyPage />}
+                />
+                <Route
+                    path="/CozyPage"
+                    element={<CozyPage />}
+                />
             </Routes>
         </main>
 
-        {/* Show footer only outside mood mode */}
         {!isMoodMode && <MyFooter />}
 
     </div>
