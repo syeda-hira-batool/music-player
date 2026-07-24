@@ -7,6 +7,7 @@ export default function NavBar({ isHovered, setIsHovered, isOpen, setIsOpen }) {
     const items = [
         {
             name: "Dreaminess",
+            path: "/DreamPage",
             description:
                 "It evokes an airy, weightless, and floating sensation, creating a dream-like atmosphere."
         },
@@ -62,12 +63,11 @@ export default function NavBar({ isHovered, setIsHovered, isOpen, setIsOpen }) {
                     ease-in-out
                     rounded-b-[1000px]
 
-                    ${
-                        isHovered
-                            ? isOpen
-                                ? "h-96"
-                                : "h-32"
-                            : "h-8"
+                    ${isHovered
+                        ? isOpen
+                            ? "h-96"
+                            : "h-32"
+                        : "h-8"
                     }
                 `}
             >
@@ -110,7 +110,7 @@ export default function NavBar({ isHovered, setIsHovered, isOpen, setIsOpen }) {
 
                             </div>
 
-                            <button 
+                            <button
                                 onClick={() => setIsOpen(!isOpen)} className="bg-[#F1E2D1] rounded-full font-puff  text-[#CD2C58] px-4 py-2"
                             >
                                 Show Modes ★
@@ -126,13 +126,15 @@ export default function NavBar({ isHovered, setIsHovered, isOpen, setIsOpen }) {
                                         key={item.name}
                                         className="w-40 text-center font-puff"
                                     >
-                                        <h3 className="font-medium font-puff">
-                                            {item.name}
-                                        </h3>
+                                        <Link to={item.path}>
+                                            <h3 className="font-medium font-puff">
+                                                {item.name}
+                                            </h3>
 
-                                        <p className="text-[#FFE6D4] text-xs font-light mt-2 leading-relaxed font-[cursive]">
-                                            {item.description}
-                                        </p>
+                                            <p className="text-[#FFE6D4] text-xs font-light mt-2 leading-relaxed font-[cursive]">
+                                                {item.description}
+                                            </p>
+                                        </Link>
                                     </li>
                                 ))}
 

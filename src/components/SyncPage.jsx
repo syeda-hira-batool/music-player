@@ -3,7 +3,7 @@ import sadCatGif from "../assets/sad_cat.gif";
 
 export default function SyncPage() {
     return (
-        <div className="text-center py-16">
+        <div className="text-center py-40">
             <h1 className="text-3xl text-[#CD2C58] font-bold font-puff">
                 New Feature will be added soon
             </h1>

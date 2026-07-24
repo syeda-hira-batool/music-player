@@ -22,18 +22,12 @@ export default function HomePage({ isHovered, isOpen }) {
             )}
 
             {isOpen && (
-                <div className="text-[#CD2C58] mt-37 text-center font-puff text-2xl">
+                <div className="text-[#CD2C58] mt-44 text-center font-puff text-2xl">
                     <p className="text-bold text-6xl">
-                        Click the relevant links below to enter:
+                        Click the relevant links to enter:
                     </p>
 
-                    <ul className="mt-4  font-puff text-2xl">
-                        <li>Dreaminess</li>
-                        <li>Joy</li>
-                        <li>Party</li>
-                        <li>Sad</li>
-                        <li>Cozy</li>
-                    </ul>
+                    
                 </div>
             )}
 

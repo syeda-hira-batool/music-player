@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @theme {
     --font-puff: "DynaPuff", sans-serif;
+    --font-CormorantGaramond: "Cormorant Garamond", sans-serif;
 }
 body{
     background: #FFC4C4;
