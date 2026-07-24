@@ -13,6 +13,7 @@ export default function NavBar({ isHovered, setIsHovered, isOpen, setIsOpen }) {
         },
         {
             name: "Joy",
+            path: "/JoyPage",
             description:
                 "It evokes happiness and creates an uplifting, cheerful mood."
         },
@@ -30,7 +31,14 @@ export default function NavBar({ isHovered, setIsHovered, isOpen, setIsOpen }) {
             name: "Cozy",
             description:
                 "Perfect for studying, unwinding, and relaxing."
-        }
+        },
+        {
+            name: "Comfort",
+            path: "/ComfortPage",
+            description:
+                "Your comfort zone"
+
+        },
     ];
 
     return (

@@ -2,6 +2,8 @@
 @theme {
     --font-puff: "DynaPuff", sans-serif;
     --font-CormorantGaramond: "Cormorant Garamond", sans-serif;
+    --font-Fredoka: "Fredoka", sans-serif;
+    --font-QuickSand: "Quicksand", sans-serif;
 }
 body{
     background: #FFC4C4;
