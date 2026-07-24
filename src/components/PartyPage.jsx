@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import OurSummer from "../assets/OurSummer.mp3";
 import Ghosting from "../assets/Ghosting.mp3";
@@ -16,6 +16,10 @@ import ForwardButton from "../assets/ForwardButton.png";
 import PauseButton from "../assets/PauseButton.png";
 import PlayButton from "../assets/playButton.png";
 import cd from "../assets/cd.png";
+
+// Save the party photo you shared into your assets folder (e.g. src/assets/PartyBg.jpg)
+// and it will be used as the page background below.
+import PartyBg from "../assets/PartyBg.jpg";
 
 
 
@@ -78,6 +82,7 @@ export default function PartyPage() {
     const [progress, setProgress] = useState(0);
     const [duration, setDuration] = useState(0);
 
+    // discoActive is now a persistent on/off toggle, not a one-shot burst
     const [discoActive, setDiscoActive] = useState(false);
     const [confetti, setConfetti] = useState([]);
 
@@ -160,15 +165,10 @@ export default function PartyPage() {
         return `${minutes}:${String(seconds).padStart(2, "0")}`;
     };
 
-    const triggerDisco = () => {
-        setDiscoActive(false);
-
-        // restart animation even if clicked again mid-burst
-        requestAnimationFrame(() => {
-            setDiscoActive(true);
-        });
-
-        setTimeout(() => setDiscoActive(false), 1000);
+    // Now a simple on/off toggle: click once to spread the lights and start
+    // the spin, click again to switch it off.
+    const toggleDisco = () => {
+        setDiscoActive((prev) => !prev);
     };
 
     const launchConfetti = () => {
@@ -240,40 +240,97 @@ export default function PartyPage() {
                     cursor: pointer;
                 }
 
-                @keyframes ray-burst {
+                /* ---------- BACKGROUND PHOTO (no pixel-stretch look) ---------- */
+
+                .bg-photo-bleed {
+                    background-image: url(${PartyBg});
+                    background-size: cover;
+                    background-position: center;
+                    /* slightly oversized + heavily blurred so cropped edges never show a hard cut */
+                    transform: scale(1.15);
+                    filter: blur(34px) brightness(0.55) saturate(1.25);
+                }
+
+                .bg-photo-main {
+                    background-image: url(${PartyBg});
+                    background-size: cover;
+                    background-position: center;
+                    /* a hair of blur + grade hides upscaling artifacts without looking soft */
+                    filter: blur(0.6px) contrast(1.06) saturate(1.15) brightness(0.82);
+                }
+
+                .bg-grain {
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+                    background-size: 180px 180px;
+                    mix-blend-mode: overlay;
+                    opacity: 0.05;
+                }
+
+                /* ---------- DISCO BALL (continuous, toggled) ---------- */
+
+                @keyframes disco-ball-spin {
                     0% {
-                        transform: rotate(var(--angle)) scaleY(0);
-                        opacity: 0.95;
+                        transform: rotate(0deg);
+                        box-shadow: 0 0 20px 6px rgba(255,255,255,0.6);
                     }
-                    60% {
-                        opacity: 0.65;
+                    50% {
+                        box-shadow: 0 0 60px 24px rgba(0,240,255,0.55);
                     }
                     100% {
-                        transform: rotate(var(--angle)) scaleY(1);
-                        opacity: 0;
+                        transform: rotate(360deg);
+                        box-shadow: 0 0 20px 6px rgba(255,255,255,0.6);
                     }
+                }
+
+                .disco-ball-spinning {
+                    animation: disco-ball-spin 4s linear infinite;
+                }
+
+                @keyframes disco-rays-rotate {
+                    from {
+                        transform: translateX(-50%) rotate(0deg);
+                    }
+                    to {
+                        transform: translateX(-50%) rotate(360deg);
+                    }
+                }
+
+                .disco-rays-spin {
+                    left: 50%;
+                    animation: disco-rays-rotate 6s linear infinite;
                 }
 
                 .disco-ray {
                     position: absolute;
                     top: 0;
-                    left: 50%;
+                    left: 0;
                     width: 5px;
                     height: 320px;
                     margin-left: -2.5px;
                     transform-origin: top center;
-                    animation: ray-burst 1s ease-out forwards;
+                    opacity: 0.55;
                 }
 
-                @keyframes disco-glow-pulse {
-                    0% { box-shadow: 0 0 20px 6px rgba(255,255,255,0.6); }
-                    50% { box-shadow: 0 0 60px 24px rgba(0,240,255,0.55); }
-                    100% { box-shadow: 0 0 20px 6px rgba(255,255,255,0.6); }
+                @keyframes disco-shimmer-move {
+                    0% {
+                        background-position: 0 0, 30px 30px;
+                    }
+                    100% {
+                        background-position: 200px 200px, 230px 230px;
+                    }
                 }
 
-                .disco-ball-active {
-                    animation: disco-glow-pulse 1s ease-out;
+                .disco-shimmer {
+                    background-image:
+                        radial-gradient(rgba(255,255,255,0.55) 1px, transparent 2.5px),
+                        radial-gradient(rgba(0,240,255,0.35) 1px, transparent 2.5px);
+                    background-size: 60px 60px, 60px 60px;
+                    animation: disco-shimmer-move 3s linear infinite;
+                    mix-blend-mode: screen;
+                    opacity: 0.55;
                 }
+
+                /* ---------- CONFETTI ---------- */
 
                 @keyframes confetti-fall {
                     0% {
@@ -299,11 +356,20 @@ export default function PartyPage() {
             `}</style>
 
 
-            {/* Background Gradient */}
+            {/* BACKGROUND PHOTO — layered so a small source photo can cover the
+                whole viewport without looking blocky/pixelated:
+                1) an oversized, heavily blurred "bleed" copy fills any gaps
+                2) the crisp cover-fit photo sits on top with a hint of blur+grade
+                3) a subtle grain layer breaks up any upscaled blockiness
+                4) the original gradient sits on top at low opacity for color + vignette */}
 
-            <div
-                className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,#FFD0FC_0%,#D926A9_35%,#4A0E4E_70%,#0F021B_100%)]"
-            />
+            <div className="fixed inset-0 -z-10 overflow-hidden bg-[#0F021B]">
+                <div className="absolute inset-0 bg-photo-bleed" />
+                <div className="absolute inset-0 bg-photo-main" />
+                <div className="absolute inset-0 bg-grain" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#FFD0FC_0%,#D926A9_35%,#4A0E4E_70%,#0F021B_100%)] opacity-40 mix-blend-multiply" />
+                <div className="absolute inset-0 bg-black/20" />
+            </div>
 
 
             {/* DISCO BALL */}
@@ -315,13 +381,13 @@ export default function PartyPage() {
 
                 {/* Ball */}
                 <button
-                    onClick={triggerDisco}
-                    aria-label="Shake the disco ball"
+                    onClick={toggleDisco}
+                    aria-label="Toggle disco lights"
+                    aria-pressed={discoActive}
                     className={`
                     w-20
                     h-20
                     rounded-full
-                    bg-[radial-gradient(circle_at_30%_30%,#ffffff_0%,#d9d9d9_35%,#8a8a8a_65%,#333333_100%)]
                     border
                     border-white/40
                     shadow-xl
@@ -329,37 +395,41 @@ export default function PartyPage() {
                     hover:scale-105
                     active:scale-95
                     transition
-                    ${discoActive ? "disco-ball-active" : ""}
+                    ${discoActive ? "disco-ball-spinning" : ""}
                     `}
                     style={{
                         backgroundImage:
-                            "radial-gradient(circle_at_30%_30%, #ffffff 0%, #d9d9d9 35%, #8a8a8a 65%, #333333 100%), repeating-linear-gradient(45deg, rgba(255,255,255,0.25) 0px, rgba(255,255,255,0.25) 2px, transparent 2px, transparent 8px), repeating-linear-gradient(-45deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 2px, transparent 2px, transparent 8px)",
+                            "radial-gradient(circle at 30% 30%, #ffffff 0%, #d9d9d9 35%, #8a8a8a 65%, #333333 100%), repeating-linear-gradient(45deg, rgba(255,255,255,0.25) 0px, rgba(255,255,255,0.25) 2px, transparent 2px, transparent 8px), repeating-linear-gradient(-45deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 2px, transparent 2px, transparent 8px)",
                     }}
                 />
 
             </div>
 
-            {/* DISCO LIGHT BURST */}
+            {/* DISCO LIGHT SPREAD — stays on (rotating rays + shimmer) until toggled off */}
 
             {discoActive && (
-                <div className="fixed top-[80px] left-1/2 -translate-x-1/2 z-40 pointer-events-none w-0 h-0">
-                    {Array.from({ length: DISCO_RAY_COUNT }).map((_, i) => {
-                        const angle = (360 / DISCO_RAY_COUNT) * i;
-                        const color =
-                            discoRayColors[i % discoRayColors.length];
+                <>
+                    <div className="fixed top-[80px] left-1/2 z-40 pointer-events-none w-0 h-0 disco-rays-spin">
+                        {Array.from({ length: DISCO_RAY_COUNT }).map((_, i) => {
+                            const angle = (360 / DISCO_RAY_COUNT) * i;
+                            const color =
+                                discoRayColors[i % discoRayColors.length];
 
-                        return (
-                            <div
-                                key={i}
-                                className="disco-ray"
-                                style={{
-                                    "--angle": `${angle}deg`,
-                                    background: `linear-gradient(to bottom, ${color}, transparent)`,
-                                }}
-                            />
-                        );
-                    })}
-                </div>
+                            return (
+                                <div
+                                    key={i}
+                                    className="disco-ray"
+                                    style={{
+                                        transform: `rotate(${angle}deg)`,
+                                        background: `linear-gradient(to bottom, ${color}, transparent)`,
+                                    }}
+                                />
+                            );
+                        })}
+                    </div>
+
+                    <div className="fixed inset-0 z-30 pointer-events-none disco-shimmer" />
+                </>
             )}
 
             {/* CONFETTI OVERLAY */}
@@ -380,6 +450,36 @@ export default function PartyPage() {
                     }}
                 />
             ))}
+
+            {/* FIXED CONFETTI BUTTON — always visible in the corner, independent of the player panel */}
+
+            <button
+                onClick={launchConfetti}
+                aria-label="Blow confetti"
+                className="
+                fixed
+                top-6
+                right-6
+                z-50
+                w-14
+                h-14
+                rounded-full
+                bg-white/15
+                backdrop-blur-xl
+                border
+                border-white/30
+                shadow-xl
+                text-2xl
+                flex
+                items-center
+                justify-center
+                hover:scale-110
+                active:scale-95
+                transition
+                "
+            >
+                🎉
+            </button>
 
 
             <audio
@@ -558,35 +658,6 @@ export default function PartyPage() {
                             shadow-2xl
                             "
                         />
-
-                        {/* CONFETTI BUTTON */}
-
-                        <button
-                            onClick={launchConfetti}
-                            aria-label="Blow confetti"
-                            className="
-                            absolute
-                            -bottom-3
-                            -right-3
-                            w-12
-                            h-12
-                            rounded-full
-                            bg-white/15
-                            backdrop-blur-xl
-                            border
-                            border-white/30
-                            shadow-xl
-                            text-2xl
-                            flex
-                            items-center
-                            justify-center
-                            hover:scale-110
-                            active:scale-95
-                            transition
-                            "
-                        >
-                            🎉
-                        </button>
 
                     </div>
 

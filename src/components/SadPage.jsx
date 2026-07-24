@@ -283,7 +283,7 @@ export default function SadPage() {
                 <div className="p-8">
 
                     <h2 className="text-white text-3xl mb-8 font-SadFont">
-                        Comfort Playlist
+                        Sad Playlist
                     </h2>
 
                     <div className="space-y-4 font-SadFont">
