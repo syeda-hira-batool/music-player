@@ -105,7 +105,6 @@ export default function InfoPage() {
     };
 
     return (
-        /* Decreased top padding to pt-12 and gap to gap-6 to bring everything higher */
         <div className="p-6 pt-3 flex flex-col items-center gap-5">
 
             <div className="flex flex-col items-center justify-center w-full max-w-2xl">
@@ -114,14 +113,12 @@ export default function InfoPage() {
                     onSubmit={handleSubmit}
                     className="flex flex-col items-center gap-3 w-full"
                 >
-                    {/* Dancing cat placed above the mode buttons */}
                     <img
                         src={catDance2Gif}
                         alt="Dancing cat"
                         className="w-20 sm:w-24 object-contain"
                     />
 
-                    {/* Mode buttons */}
                     <div className="flex gap-2 text-sm justify-center">
                         <button
                             type="button"
@@ -147,7 +144,6 @@ export default function InfoPage() {
                         </button>
                     </div>
 
-                    {/* Inputs centered in a responsive row */}
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-2 w-full">
                         <label htmlFor="search" className="sr-only">
                             Search
@@ -177,7 +173,6 @@ export default function InfoPage() {
                         />
                     </div>
 
-                    {/* Submit Button cleanly centered underneath */}
                     <button
                         type="submit"
                         className="bg-[#CD2C58] text-[#FFE6D4] px-4 py-1 rounded-full"

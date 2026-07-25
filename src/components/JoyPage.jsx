@@ -190,8 +190,6 @@ export default function JoyPage() {
                     cursor: pointer;
                 }
 
-                /* ---------- PLAYLIST SCROLLBAR (scoped to the playlist list only) ---------- */
-
                 .playlist-scroll {
                     scrollbar-width: thin;
                     scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
@@ -515,7 +513,7 @@ export default function JoyPage() {
 
 
             <h2 className="fixed bottom-17 left-8 z-50 text-xs text-white/60 font-fredoka">
-                Press F11 for better experience
+                Press F11 for a better experience
             </h2>
 
         </div>

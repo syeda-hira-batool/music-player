@@ -47,6 +47,42 @@ const concepts = [
         title: "Static Asset Imports",
         body: "Gifs are imported directly as JS modules (helloKittyGif, catDance2Gif, sadCatGif) rather than referenced by path string, letting the bundler handle and optimize each asset before it's used in an <img> tag.",
     },
+    {
+        title: "React Hooks — useRef & the HTML5 Audio API",
+        body: "Every mood page (Dream, Joy, Party, Sad, Cozy, Comfort) holds an audioRef pointing at a hidden <audio> element, then calls .load(), .play(), and .pause() on it directly to build a fully custom player — play/pause, skip forward/back, and a seekable progress bar — instead of the browser's default controls.",
+    },
+    {
+        title: "Programmatic Navigation — useNavigate",
+        body: "Each mood page uses useNavigate from react-router-dom to send the user back to Home when the 'Exit the mode' button is clicked, complementing the declarative Link-based navigation used elsewhere in the app.",
+    },
+    {
+        title: "useEffect Cleanup & Keyboard Events",
+        body: "App.jsx attaches a keydown listener for the Escape key whenever a mood mode is active, navigating back to Home on press, and removes that listener in the effect's cleanup function whenever the mode changes or the component unmounts — a classic example of avoiding memory leaks and duplicate listeners.",
+    },
+    {
+        title: "Layered Video Backgrounds",
+        body: "Each mood page stacks two <video> elements over the same clip — a blurred, scaled-up fill layer behind a sharp, contained layer — so the background always fills the screen without visible pixelation or letterboxing on any aspect ratio.",
+    },
+    {
+        title: "Dynamic Styling with Injected <style> Tags",
+        body: "Mood pages embed a <style> block built from a template literal so imported image assets (a CD icon, a star, a cloud) can be wired up as the thumb of a native range input — a trick for reaching pseudo-elements like ::-webkit-slider-thumb that Tailwind classes can't target directly.",
+    },
+    {
+        title: "React Hooks — useMemo",
+        body: "PartyPage.jsx uses useMemo to generate the disco ball's tile positions once via trigonometric math, rather than recalculating that expensive layout on every re-render.",
+    },
+    {
+        title: "Canvas API & requestAnimationFrame",
+        body: "PixelDust.jsx draws directly onto a full-screen canvas: it tracks mouse movement, spawns fading particles at the cursor, and animates them every frame with requestAnimationFrame, cleaning up its event listeners on unmount.",
+    },
+    {
+        title: "Third-Party Libraries",
+        body: "PartyPage.jsx integrates canvas-confetti to fire a burst of confetti on click, showing how the app pulls in external npm packages alongside its own hand-rolled components.",
+    },
+    {
+        title: "Sliding Panels with CSS Transforms",
+        body: "The playlist and 'Now Playing' panels on each mood page stay mounted in the DOM at all times and are shown or hidden purely with translate-x classes and Tailwind's transition-transform, giving a smooth slide-in/out effect without conditional rendering.",
+    },
 ];
 
 export default function AboutPage() {

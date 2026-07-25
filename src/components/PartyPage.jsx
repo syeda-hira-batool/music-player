@@ -21,7 +21,6 @@ import PauseButton from "../assets/PauseButton.png";
 import PlayButton from "../assets/playButton.png";
 import cd from "../assets/cd.png";
 
-// Save your party photo and video files into your src/assets folder
 import PartyBg from "../assets/PartyBg.jpg";
 import PartyVideo1 from "../assets/partyDance.mp4";
 
@@ -65,7 +64,7 @@ const songs = [
     },
 ];
 
-// Light-ray colors for the disco ball burst
+// Light-ray colors for the disco ball burst (inspired by the website)
 const discoRayColors = ["#FFFFFF", "#00F0FF", "#FF007F", "#1E1B4B", "#0B0F19"];
 
 const DISCO_RAY_COUNT = 12;
@@ -479,7 +478,6 @@ export default function PartyPage() {
                 </button>
             </div>
 
-            {/* DISCO LIGHT SPREAD & DANCING VIDEO */}
             {discoActive && (
                 <>
                     <div className="fixed top-[80px] left-1/2 z-40 pointer-events-none w-0 h-0 disco-rays-spin">
@@ -503,7 +501,6 @@ export default function PartyPage() {
 
                     <div className="fixed inset-0 z-30 pointer-events-none disco-shimmer" />
 
-                    {/* DANCING VIDEO - Bottom Center */}
                     <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-30 w-48 md:w-64 h-72 md:h-96 rounded-3xl overflow-hidden border border-white/20 bg-black/30 backdrop-blur-md shadow-2xl transition-all duration-500 animate-bounce">
                         <video
                             src={PartyVideo1}
@@ -517,7 +514,6 @@ export default function PartyPage() {
                 </>
             )}
 
-            {/* CONFETTI BUTTON */}
             <button
                 id="hs-run-on-click-run-confetti"
                 onClick={launchConfetti}
@@ -560,7 +556,6 @@ export default function PartyPage() {
                 <source src={currentSong.audio} />
             </audio>
 
-            {/* PLAYLIST PANEL */}
             <div
                 className={`
                 fixed
@@ -647,7 +642,6 @@ export default function PartyPage() {
                 </div>
             </div>
 
-            {/* NOW PLAYING PLAYER PANEL */}
             <div
                 className={`
                 fixed
@@ -810,7 +804,7 @@ export default function PartyPage() {
             </button>
 
             <h2 className="fixed bottom-17 left-8 z-50 text-xs text-white/60 font-monoton">
-                Press F11 for better experience
+                Press F11 for better a experience
             </h2>
         </div>
     );

@@ -26,7 +26,7 @@ export default function PixelDust() {
             mouse.x = event.clientX;
             mouse.y = event.clientY;
 
-            // Create pixel dust
+            // Creating pixel dust
             for (let i = 0; i < 7; i++) {
                 particles.push({
                     x: mouse.x,

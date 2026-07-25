@@ -182,8 +182,6 @@ export default function DreamPage() {
                     cursor: pointer;
                 }
 
-                /* ---------- PLAYLIST SCROLLBAR (scoped to the playlist list only) ---------- */
-
                 .playlist-scroll {
                     scrollbar-width: thin;
                     scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
@@ -207,8 +205,6 @@ export default function DreamPage() {
                 }
             `}</style>
 
-            {/* Background Video */}
-
             <div className="absolute inset-0 overflow-hidden bg-black">
 
                 {/* Blurred fill layer — masks the edges, no visible pixelation */}
@@ -222,7 +218,6 @@ export default function DreamPage() {
                     <source src={dreamBackground} type="video/mp4" />
                 </video>
 
-                {/* Sharp foreground layer — never stretched past its native size */}
                 <video
                     autoPlay
                     loop
@@ -513,7 +508,7 @@ export default function DreamPage() {
 
 
             <h2 className="fixed bottom-17 left-8 z-50 text-xs text-white/60 font-CormorantGaramond">
-                Press F11 for better experience
+                Press F11 for a better experience
             </h2>
 
         </div>
