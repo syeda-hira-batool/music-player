@@ -8,12 +8,15 @@ import Knife from "../assets/Knife.mp3";
 import WorldCup from "../assets/WorldCup.mp3";
 import RedRed from "../assets/RedRed.mp3";
 import Bad from "../assets/Bad.mp3";
+import BeatIt from "../assets/BeatIt.mp3";
+import BilliJean from "../assets/BilliJean.mp3";
 
 import SmoothCriminalCover from "../assets/SmoothCriminalCover.png";
 import RideOrDieCover from "../assets/RideOrDieCover.jfif";
 import KnifeCover from "../assets/KnifeCover.jpg";
 import WorldCupCover from "../assets/WorldCupCover.jpg";
 import RedRedCover from "../assets/RedRedCover.jfif";
+import BeatItCover from "../assets/BeatItCover.jfif";
 
 import BackButton from "../assets/backButton.png";
 import ForwardButton from "../assets/ForwardButton.png";
@@ -61,6 +64,18 @@ const songs = [
         artist: "Michael Jackson",
         audio: Bad,
         cover: SmoothCriminalCover,
+    },
+    {
+        title: "Beat It",
+        artist: "Michael Jackson",
+        audio: BeatIt,
+        cover: BeatItCover,
+    },
+    {
+        title: "Billie Jean",
+        artist: "Michael Jackson",
+        audio: BilliJean,
+        cover: BeatItCover,
     },
 ];
 
