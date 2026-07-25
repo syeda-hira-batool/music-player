@@ -3,12 +3,12 @@ import { useRef, useState } from "react";
 
 import sadBackground from "../assets/sad-background.mp4";
 
-import OurSummer from "../assets/OurSummer.mp3";
+import OverFlow from "../assets/OverFlow.mp3";
 import Ghosting from "../assets/Ghosting.mp3";
 import BlueHour from "../assets/BlueHour.mp3";
 import AboutYou from "../assets/AboutYou.mp3";
 
-import OurSummerCover from "../assets/OurSummer.png";
+import RideOrDieCover from "../assets/RideOrDieCover.jfif";
 import GhostingCover from "../assets/Ghosting.jfif";
 import BlueHourCover from "../assets/BlueHour.jfif";
 import AboutYouCover from "../assets/AboutYou.jfif";
@@ -22,10 +22,10 @@ import cloud from "../assets/cloud.png";
 
 const songs = [
     {
-        title: "Our Summer",
-        artist: "Tomorrow X Together",
-        audio: OurSummer,
-        cover: OurSummerCover,
+        title: "Over Flow",
+        artist: "Evan",
+        audio: OverFlow,
+        cover: RideOrDieCover,
     },
     {
         title: "Ghosting",
@@ -189,6 +189,30 @@ export default function SadPage() {
                     border-radius: 0;
                     cursor: pointer;
                 }
+
+                /* ---------- PLAYLIST SCROLLBAR (scoped to the playlist list only) ---------- */
+
+                .playlist-scroll {
+                    scrollbar-width: thin;
+                    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+                }
+
+                .playlist-scroll::-webkit-scrollbar {
+                    width: 6px;
+                }
+
+                .playlist-scroll::-webkit-scrollbar-track {
+                    background: transparent;
+                }
+
+                .playlist-scroll::-webkit-scrollbar-thumb {
+                    background: rgba(255, 255, 255, 0.25);
+                    border-radius: 999px;
+                }
+
+                .playlist-scroll::-webkit-scrollbar-thumb:hover {
+                    background: rgba(255, 255, 255, 0.4);
+                }
             `}</style>
 
 
@@ -280,13 +304,13 @@ export default function SadPage() {
                     ☰
                 </button>
 
-                <div className="p-8">
+                <div className="p-8 h-full flex flex-col">
 
-                    <h2 className="text-white text-3xl mb-8 font-SadFont">
+                    <h2 className="text-white text-3xl mb-8 shrink-0 font-SadFont">
                         Sad Playlist
                     </h2>
 
-                    <div className="space-y-4 font-SadFont">
+                    <div className="space-y-4 font-SadFont flex-1 min-h-0 overflow-y-auto pr-2 playlist-scroll">
 
                         {songs.map((song, index) => (
                             <button

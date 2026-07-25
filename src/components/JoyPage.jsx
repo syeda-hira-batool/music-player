@@ -6,10 +6,12 @@ import joyBackground from "../assets/joy-background.mp4";
 import OurSummer from "../assets/OurSummer.mp3";
 import Ghosting from "../assets/Ghosting.mp3";
 import BlueHour from "../assets/BlueHour.mp3";
+import AboutYou from "../assets/AboutYou.mp3";
 
 import OurSummerCover from "../assets/OurSummer.png";
 import GhostingCover from "../assets/Ghosting.jfif";
 import BlueHourCover from "../assets/BlueHour.jfif";
+import AboutYouCover from "../assets/AboutYou.jfif";
 
 import BackButton from "../assets/backButton.png";
 import ForwardButton from "../assets/ForwardButton.png";
@@ -17,7 +19,6 @@ import PauseButton from "../assets/PauseButton.png";
 import PlayButton from "../assets/playButton.png";
 import cd from "../assets/cd.png";
 
-import PixelDust from "./PixelDust";
 
 const songs = [
     {
@@ -37,6 +38,12 @@ const songs = [
         artist: "Tomorrow X Together",
         audio: BlueHour,
         cover: BlueHourCover,
+    },
+    {
+        title: "About You",
+        artist: "The 1975",
+        audio: AboutYou,
+        cover: AboutYouCover,
     },
 ];
 
@@ -182,23 +189,55 @@ export default function JoyPage() {
                     border-radius: 0;
                     cursor: pointer;
                 }
+
+                /* ---------- PLAYLIST SCROLLBAR (scoped to the playlist list only) ---------- */
+
+                .playlist-scroll {
+                    scrollbar-width: thin;
+                    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+                }
+
+                .playlist-scroll::-webkit-scrollbar {
+                    width: 6px;
+                }
+
+                .playlist-scroll::-webkit-scrollbar-track {
+                    background: transparent;
+                }
+
+                .playlist-scroll::-webkit-scrollbar-thumb {
+                    background: rgba(255, 255, 255, 0.25);
+                    border-radius: 999px;
+                }
+
+                .playlist-scroll::-webkit-scrollbar-thumb:hover {
+                    background: rgba(255, 255, 255, 0.4);
+                }
             `}</style>
 
 
-            <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover"
-            >
-                <source
-                    src={joyBackground}
-                    type="video/mp4"
-                />
-            </video>
+            <div className="absolute inset-0 overflow-hidden bg-black">
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover scale-110 blur-3xl opacity-60"
+                >
+                    <source src={joyBackground} type="video/mp4" />
+                </video>
 
-            <PixelDust />
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-contain"
+                >
+                    <source src={joyBackground} type="video/mp4" />
+                </video>
+
+            </div>
 
 
             <audio
@@ -265,13 +304,13 @@ export default function JoyPage() {
                     ☰
                 </button>
 
-                <div className="p-8">
+                <div className="p-8 h-full flex flex-col">
 
-                    <h2 className="text-white text-3xl mb-8 font-CormorantGaramond">
-                        Dream Playlist
+                    <h2 className="text-white text-3xl mb-8 shrink-0 font-fredoka">
+                        Joy Playlist
                     </h2>
 
-                    <div className="space-y-4 font-CormorantGaramond">
+                    <div className="space-y-4 font-fredoka flex-1 min-h-0 overflow-y-auto pr-2 playlist-scroll">
 
                         {songs.map((song, index) => (
                             <button
@@ -292,11 +331,11 @@ export default function JoyPage() {
                                 }
                                 `}
                             >
-                                <h3 className="text-white text-lg font-CormorantGaramond">
+                                <h3 className="text-white text-lg font-fredoka">
                                     {song.title}
                                 </h3>
 
-                                <p className="text-white/60 text-sm font-CormorantGaramond">
+                                <p className="text-white/60 text-sm font-fredoka">
                                     {song.artist}
                                 </p>
                             </button>
@@ -358,7 +397,7 @@ export default function JoyPage() {
 
                 <div className="flex flex-col items-center p-8">
 
-                    <h2 className="text-white text-3xl font-CormorantGaramond mb-8">
+                    <h2 className="text-white text-3xl font-fredoka mb-8">
                         Now Playing
                     </h2>
 
@@ -376,11 +415,11 @@ export default function JoyPage() {
                         "
                     />
 
-                    <h3 className="text-white text-2xl mt-8 font-CormorantGaramond">
+                    <h3 className="text-white text-2xl mt-8 font-fredoka">
                         {currentSong.title}
                     </h3>
 
-                    <p className="text-white/60 mt-2 font-CormorantGaramond">
+                    <p className="text-white/60 mt-2 font-fredoka">
                         {currentSong.artist}
                     </p>
 
@@ -456,7 +495,7 @@ export default function JoyPage() {
                 onClick={() => navigate("/")}
                 className="
                 fixed
-                font-CormorantGaramond
+                font-fredoka
                 bottom-6
                 left-6
                 z-50
@@ -475,7 +514,7 @@ export default function JoyPage() {
             </button>
 
 
-            <h2 className="fixed bottom-17 left-8 z-50 text-xs text-white/60 font-CormorantGaramond">
+            <h2 className="fixed bottom-17 left-8 z-50 text-xs text-white/60 font-fredoka">
                 Press F11 for better experience
             </h2>
 

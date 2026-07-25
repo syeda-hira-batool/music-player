@@ -9,8 +9,8 @@
     --font-Fredoka: "Fredoka", sans-serif;
     --font-QuickSand: "Quicksand", sans-serif;
     --font-Volkhov: "Volkhov"  , sans-serif;
-    
-    /* Wrap font names with spaces in escaped quotes or double quotes */
+    --font-monoton: 'Monoton', display;
+    --font-fredoka: 'Fredoka', sans-serif;
     --font-SadFont: '"Nothing You Could Say"', cursive;
 }
 

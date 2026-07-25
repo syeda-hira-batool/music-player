@@ -1,15 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import { useMemo, useRef, useState } from "react";
+import confetti from "canvas-confetti";
 
-import OurSummer from "../assets/OurSummer.mp3";
-import Ghosting from "../assets/Ghosting.mp3";
-import BlueHour from "../assets/BlueHour.mp3";
-import AboutYou from "../assets/AboutYou.mp3";
+import SmoothCriminal from "../assets/SmoothCriminal.mp3";
+import RideOrDie from "../assets/RideOrDie.mp3";
+import Knife from "../assets/Knife.mp3";
+import WorldCup from "../assets/WorldCup.mp3";
+import RedRed from "../assets/RedRed.mp3";
+import Bad from "../assets/Bad.mp3";
 
-import OurSummerCover from "../assets/OurSummer.png";
-import GhostingCover from "../assets/Ghosting.jfif";
-import BlueHourCover from "../assets/BlueHour.jfif";
-import AboutYouCover from "../assets/AboutYou.jfif";
+import SmoothCriminalCover from "../assets/SmoothCriminalCover.png";
+import RideOrDieCover from "../assets/RideOrDieCover.jfif";
+import KnifeCover from "../assets/KnifeCover.jpg";
+import WorldCupCover from "../assets/WorldCupCover.jpg";
+import RedRedCover from "../assets/RedRedCover.jfif";
 
 import BackButton from "../assets/backButton.png";
 import ForwardButton from "../assets/ForwardButton.png";
@@ -17,55 +21,96 @@ import PauseButton from "../assets/PauseButton.png";
 import PlayButton from "../assets/playButton.png";
 import cd from "../assets/cd.png";
 
-// Save the party photo you shared into your assets folder (e.g. src/assets/PartyBg.jpg)
-// and it will be used as the page background below.
+// Save your party photo and video files into your src/assets folder
 import PartyBg from "../assets/PartyBg.jpg";
-
+import PartyVideo1 from "../assets/partyDance.mp4";
 
 
 const songs = [
     {
-        title: "Our Summer",
-        artist: "Tomorrow X Together",
-        audio: OurSummer,
-        cover: OurSummerCover,
+        title: "Smooth Criminal",
+        artist: "Michael Jackson",
+        audio: SmoothCriminal,
+        cover: SmoothCriminalCover,
     },
     {
-        title: "Ghosting",
-        artist: "Tomorrow X Together",
-        audio: Ghosting,
-        cover: GhostingCover,
+        title: "RideOrDie",
+        artist: "Evan (former Enhypen Member)",
+        audio: RideOrDie,
+        cover: RideOrDieCover,
     },
     {
-        title: "Blue Hour",
-        artist: "Tomorrow X Together",
-        audio: BlueHour,
-        cover: BlueHourCover,
+        title: "Knife",
+        artist: "Enhypen (Sunghoon Version)",
+        audio: Knife,
+        cover: KnifeCover,
     },
     {
-        title: "About You",
-        artist: "The 1975",
-        audio: AboutYou,
-        cover: AboutYouCover,
+        title: "World Cup",
+        artist: "IShowSpeed",
+        audio: WorldCup,
+        cover: WorldCupCover,
+    },
+    {
+        title: "RedRed",
+        artist: "Cortis",
+        audio: RedRed,
+        cover: RedRedCover,
+    },
+    {
+        title: "Bad",
+        artist: "Michael Jackson",
+        audio: Bad,
+        cover: SmoothCriminalCover,
     },
 ];
 
 // Light-ray colors for the disco ball burst
 const discoRayColors = ["#FFFFFF", "#00F0FF", "#FF007F", "#1E1B4B", "#0B0F19"];
 
-// Confetti palette pulled from both provided gradients
-const confettiColors = [
-    "#FFD0FC",
-    "#D926A9",
-    "#4A0E4E",
-    "#00F0FF",
-    "#FF007F",
-    "#1E1B4B",
-    "#FFFFFF",
-];
-
 const DISCO_RAY_COUNT = 12;
-const CONFETTI_COUNT = 70;
+
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function generateDiscoTiles({ radius = 34, squareSize = 4.5, prec = 13 } = {}) {
+    const fuzzy = 0.001;
+    const inc = (Math.PI - fuzzy) / prec;
+    const tiles = [];
+    let key = 0;
+
+    for (let t = fuzzy; t < Math.PI; t += inc) {
+        const currentRadius =
+            Math.abs(
+                radius * Math.cos(0) * Math.sin(t) -
+                    radius * Math.cos(Math.PI) * Math.sin(t)
+            ) / 2.5;
+        const circumference = Math.abs(2 * Math.PI * currentRadius);
+        const squaresThatFit = Math.max(1, Math.floor(circumference / squareSize));
+        const angleInc = (Math.PI * 2 - fuzzy) / squaresThatFit;
+
+        for (let i = angleInc / 2 + fuzzy; i < Math.PI * 2; i += angleInc) {
+            const x = radius * Math.cos(i) * Math.sin(t);
+            const y = radius * Math.sin(i) * Math.sin(t);
+            const z = radius * Math.cos(t);
+
+            const isEquatorBand = t > 1.3 && t < 1.9;
+            const shade = isEquatorBand ? randomInt(150, 255) : randomInt(120, 200);
+
+            tiles.push({
+                key: key++,
+                wrapperTransform: `translate3d(${x}px, ${y}px, ${z}px)`,
+                tileTransform: `rotate(${i}rad) rotateY(${t}rad)`,
+                color: `rgb(${shade}, ${shade}, ${shade})`,
+                delay: `${(randomInt(0, 20) / 10).toFixed(1)}s`,
+                size: squareSize,
+            });
+        }
+    }
+
+    return tiles;
+}
 
 export default function PartyPage() {
     const navigate = useNavigate();
@@ -82,9 +127,9 @@ export default function PartyPage() {
     const [progress, setProgress] = useState(0);
     const [duration, setDuration] = useState(0);
 
-    // discoActive is now a persistent on/off toggle, not a one-shot burst
     const [discoActive, setDiscoActive] = useState(false);
-    const [confetti, setConfetti] = useState([]);
+
+    const discoTiles = useMemo(() => generateDiscoTiles(), []);
 
     const currentSong = songs[currentIndex];
 
@@ -165,36 +210,20 @@ export default function PartyPage() {
         return `${minutes}:${String(seconds).padStart(2, "0")}`;
     };
 
-    // Now a simple on/off toggle: click once to spread the lights and start
-    // the spin, click again to switch it off.
     const toggleDisco = () => {
         setDiscoActive((prev) => !prev);
     };
 
     const launchConfetti = () => {
-        const pieces = Array.from({ length: CONFETTI_COUNT }).map((_, i) => ({
-            id: `${Date.now()}-${i}`,
-            left: Math.random() * 100,
-            color:
-                confettiColors[
-                    Math.floor(Math.random() * confettiColors.length)
-                ],
-            rotation: Math.round(Math.random() * 360),
-            duration: 2.5 + Math.random() * 2,
-            delay: Math.random() * 0.4,
-            drift: Math.round((Math.random() - 0.5) * 220),
-            size: 6 + Math.round(Math.random() * 6),
-        }));
-
-        setConfetti(pieces);
-
-        setTimeout(() => setConfetti([]), 5200);
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+        });
     };
 
     return (
         <div className="relative min-h-screen overflow-hidden">
-
-
             <style>{`
                 .dream-progress {
                     -webkit-appearance: none;
@@ -240,13 +269,10 @@ export default function PartyPage() {
                     cursor: pointer;
                 }
 
-                /* ---------- BACKGROUND PHOTO (no pixel-stretch look) ---------- */
-
                 .bg-photo-bleed {
                     background-image: url(${PartyBg});
                     background-size: cover;
                     background-position: center;
-                    /* slightly oversized + heavily blurred so cropped edges never show a hard cut */
                     transform: scale(1.15);
                     filter: blur(34px) brightness(0.55) saturate(1.25);
                 }
@@ -255,7 +281,6 @@ export default function PartyPage() {
                     background-image: url(${PartyBg});
                     background-size: cover;
                     background-position: center;
-                    /* a hair of blur + grade hides upscaling artifacts without looking soft */
                     filter: blur(0.6px) contrast(1.06) saturate(1.15) brightness(0.82);
                 }
 
@@ -266,24 +291,46 @@ export default function PartyPage() {
                     opacity: 0.05;
                 }
 
-                /* ---------- DISCO BALL (continuous, toggled) ---------- */
-
-                @keyframes disco-ball-spin {
-                    0% {
-                        transform: rotate(0deg);
-                        box-shadow: 0 0 20px 6px rgba(255,255,255,0.6);
-                    }
-                    50% {
-                        box-shadow: 0 0 60px 24px rgba(0,240,255,0.55);
-                    }
-                    100% {
-                        transform: rotate(360deg);
-                        box-shadow: 0 0 20px 6px rgba(255,255,255,0.6);
-                    }
+                @keyframes disco-tiles-rotate {
+                    0% { transform: rotateX(90deg) rotateZ(0deg); }
+                    100% { transform: rotateX(90deg) rotateZ(360deg); }
                 }
 
-                .disco-ball-spinning {
-                    animation: disco-ball-spin 4s linear infinite;
+                @keyframes disco-core-rotate {
+                    0% { transform: rotateX(90deg) rotateY(0deg); }
+                    100% { transform: rotateX(90deg) rotateY(-360deg); }
+                }
+
+                @keyframes disco-tile-reflect {
+                    0% { opacity: 0.45; }
+                    50% { opacity: 1; }
+                    100% { opacity: 0.45; }
+                }
+
+                .disco-tiles-idle {
+                    animation: disco-tiles-rotate 16s linear infinite;
+                }
+
+                .disco-tiles-active {
+                    animation: disco-tiles-rotate 5s linear infinite;
+                }
+
+                .disco-core-idle {
+                    animation: disco-core-rotate 16s linear infinite;
+                }
+
+                .disco-core-active {
+                    animation: disco-core-rotate 5s linear infinite;
+                }
+
+                .disco-tile {
+                    animation: disco-tile-reflect 3s linear infinite;
+                    backface-visibility: hidden;
+                    border-radius: 1px;
+                }
+
+                .disco-tile-active {
+                    animation-duration: 1.3s;
                 }
 
                 @keyframes disco-rays-rotate {
@@ -330,38 +377,28 @@ export default function PartyPage() {
                     opacity: 0.55;
                 }
 
-                /* ---------- CONFETTI ---------- */
-
-                @keyframes confetti-fall {
-                    0% {
-                        transform: translateY(-10vh) translateX(0) rotate(0deg);
-                        opacity: 1;
-                    }
-                    100% {
-                        transform: translateY(110vh) translateX(var(--drift)) rotate(720deg);
-                        opacity: 0.85;
-                    }
+                .playlist-scroll {
+                    scrollbar-width: thin;
+                    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
                 }
 
-                .confetti-piece {
-                    position: fixed;
-                    top: 0;
-                    border-radius: 2px;
-                    animation-name: confetti-fall;
-                    animation-timing-function: ease-in;
-                    animation-fill-mode: forwards;
-                    pointer-events: none;
-                    z-index: 60;
+                .playlist-scroll::-webkit-scrollbar {
+                    width: 6px;
+                }
+
+                .playlist-scroll::-webkit-scrollbar-track {
+                    background: transparent;
+                }
+
+                .playlist-scroll::-webkit-scrollbar-thumb {
+                    background: rgba(255, 255, 255, 0.25);
+                    border-radius: 999px;
+                }
+
+                .playlist-scroll::-webkit-scrollbar-thumb:hover {
+                    background: rgba(255, 255, 255, 0.4);
                 }
             `}</style>
-
-
-            {/* BACKGROUND PHOTO — layered so a small source photo can cover the
-                whole viewport without looking blocky/pixelated:
-                1) an oversized, heavily blurred "bleed" copy fills any gaps
-                2) the crisp cover-fit photo sits on top with a hint of blur+grade
-                3) a subtle grain layer breaks up any upscaled blockiness
-                4) the original gradient sits on top at low opacity for color + vignette */}
 
             <div className="fixed inset-0 -z-10 overflow-hidden bg-[#0F021B]">
                 <div className="absolute inset-0 bg-photo-bleed" />
@@ -371,42 +408,78 @@ export default function PartyPage() {
                 <div className="absolute inset-0 bg-black/20" />
             </div>
 
-
-            {/* DISCO BALL */}
-
-            <div className="fixed top-0 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center">
-
-                {/* Hanging string */}
+            <div
+                className="fixed top-0 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center"
+                style={{ perspective: "700px" }}
+            >
                 <div className="w-[2px] h-10 bg-white/40" />
 
-                {/* Ball */}
                 <button
                     onClick={toggleDisco}
                     aria-label="Toggle disco lights"
                     aria-pressed={discoActive}
-                    className={`
-                    w-20
-                    h-20
-                    rounded-full
-                    border
-                    border-white/40
-                    shadow-xl
-                    cursor-pointer
-                    hover:scale-105
-                    active:scale-95
-                    transition
-                    ${discoActive ? "disco-ball-spinning" : ""}
-                    `}
-                    style={{
-                        backgroundImage:
-                            "radial-gradient(circle at 30% 30%, #ffffff 0%, #d9d9d9 35%, #8a8a8a 65%, #333333 100%), repeating-linear-gradient(45deg, rgba(255,255,255,0.25) 0px, rgba(255,255,255,0.25) 2px, transparent 2px, transparent 8px), repeating-linear-gradient(-45deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 2px, transparent 2px, transparent 8px)",
-                    }}
-                />
+                    className="relative w-20 h-20 p-0 border-0 bg-transparent cursor-pointer hover:scale-105 active:scale-95 transition"
+                    style={{ transformStyle: "preserve-3d" }}
+                >
+                    <div
+                        className="absolute inset-[-10px] rounded-full pointer-events-none"
+                        style={{
+                            background: "white",
+                            opacity: discoActive ? 0.35 : 0.18,
+                            filter: "blur(14px)",
+                            transition: "opacity 0.4s ease",
+                        }}
+                    />
 
+                    <div
+                        className={`absolute inset-0 rounded-full ${
+                            discoActive ? "disco-core-active" : "disco-core-idle"
+                        }`}
+                        style={{
+                            background: "linear-gradient(#141414, #3a3a3a)",
+                            transformStyle: "preserve-3d",
+                            boxShadow: "inset 0 0 12px 2px rgba(0,0,0,0.6)",
+                        }}
+                    />
+
+                    <div
+                        className={`absolute inset-0 ${
+                            discoActive ? "disco-tiles-active" : "disco-tiles-idle"
+                        }`}
+                        style={{ transformStyle: "preserve-3d" }}
+                    >
+                        {discoTiles.map((tile) => (
+                            <div
+                                key={tile.key}
+                                className="absolute top-1/2 left-1/2"
+                                style={{
+                                    width: tile.size,
+                                    height: tile.size,
+                                    marginLeft: -tile.size / 2,
+                                    marginTop: -tile.size / 2,
+                                    transform: tile.wrapperTransform,
+                                    transformStyle: "preserve-3d",
+                                }}
+                            >
+                                <div
+                                    className={`disco-tile ${
+                                        discoActive ? "disco-tile-active" : ""
+                                    }`}
+                                    style={{
+                                        width: "100%",
+                                        height: "100%",
+                                        transform: tile.tileTransform,
+                                        backgroundColor: tile.color,
+                                        animationDelay: tile.delay,
+                                    }}
+                                />
+                            </div>
+                        ))}
+                    </div>
+                </button>
             </div>
 
-            {/* DISCO LIGHT SPREAD — stays on (rotating rays + shimmer) until toggled off */}
-
+            {/* DISCO LIGHT SPREAD & DANCING VIDEO */}
             {discoActive && (
                 <>
                     <div className="fixed top-[80px] left-1/2 z-40 pointer-events-none w-0 h-0 disco-rays-spin">
@@ -429,31 +502,24 @@ export default function PartyPage() {
                     </div>
 
                     <div className="fixed inset-0 z-30 pointer-events-none disco-shimmer" />
+
+                    {/* DANCING VIDEO - Bottom Center */}
+                    <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-30 w-48 md:w-64 h-72 md:h-96 rounded-3xl overflow-hidden border border-white/20 bg-black/30 backdrop-blur-md shadow-2xl transition-all duration-500 animate-bounce">
+                        <video
+                            src={PartyVideo1}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover"
+                        />
+                    </div>
                 </>
             )}
 
-            {/* CONFETTI OVERLAY */}
-
-            {confetti.map((piece) => (
-                <div
-                    key={piece.id}
-                    className="confetti-piece"
-                    style={{
-                        left: `${piece.left}%`,
-                        width: `${piece.size}px`,
-                        height: `${piece.size * 0.4}px`,
-                        backgroundColor: piece.color,
-                        transform: `rotate(${piece.rotation}deg)`,
-                        animationDuration: `${piece.duration}s`,
-                        animationDelay: `${piece.delay}s`,
-                        "--drift": `${piece.drift}px`,
-                    }}
-                />
-            ))}
-
-            {/* FIXED CONFETTI BUTTON — always visible in the corner, independent of the player panel */}
-
+            {/* CONFETTI BUTTON */}
             <button
+                id="hs-run-on-click-run-confetti"
                 onClick={launchConfetti}
                 aria-label="Blow confetti"
                 className="
@@ -481,7 +547,6 @@ export default function PartyPage() {
                 🎉
             </button>
 
-
             <audio
                 ref={audioRef}
                 onLoadedMetadata={() =>
@@ -495,7 +560,7 @@ export default function PartyPage() {
                 <source src={currentSong.audio} />
             </audio>
 
-
+            {/* PLAYLIST PANEL */}
             <div
                 className={`
                 fixed
@@ -517,8 +582,6 @@ export default function PartyPage() {
                 }
                 `}
             >
-
-
                 <button
                     onClick={() => setPlaylistOpen(!playlistOpen)}
                     className="
@@ -546,14 +609,12 @@ export default function PartyPage() {
                     ☰
                 </button>
 
-                <div className="p-8">
-
-                    <h2 className="text-white text-3xl mb-8 font-SadFont">
-                        Comfort Playlist
+                <div className="p-8 h-full flex flex-col">
+                    <h2 className="text-white text-3xl mb-8 shrink-0 font-monoton">
+                        Party Playlist
                     </h2>
 
-                    <div className="space-y-4 font-SadFont">
-
+                    <div className="space-y-4 font-monoton flex-1 min-h-0 overflow-y-auto pr-2 playlist-scroll">
                         {songs.map((song, index) => (
                             <button
                                 key={song.title}
@@ -573,21 +634,20 @@ export default function PartyPage() {
                                 }
                                 `}
                             >
-                                <h3 className="text-white text-lg font-SadFont">
+                                <h3 className="text-white text-lg font-monoton">
                                     {song.title}
                                 </h3>
 
-                                <p className="text-white/60 text-sm font-SadFont">
+                                <p className="text-white/60 text-sm font-display">
                                     {song.artist}
                                 </p>
                             </button>
                         ))}
-
                     </div>
-
                 </div>
             </div>
 
+            {/* NOW PLAYING PLAYER PANEL */}
             <div
                 className={`
                 fixed
@@ -609,7 +669,6 @@ export default function PartyPage() {
                 }
                 `}
             >
-
                 <button
                     onClick={() => setPlayerOpen(!playerOpen)}
                     className="
@@ -638,13 +697,11 @@ export default function PartyPage() {
                 </button>
 
                 <div className="flex flex-col items-center p-8">
-
-                    <h2 className="text-white text-3xl font-SadFont mb-8">
+                    <h2 className="text-white text-3xl font-monoton mb-8">
                         Now Playing
                     </h2>
 
                     <div className="relative">
-
                         <img
                             src={currentSong.cover}
                             alt={currentSong.title}
@@ -658,20 +715,17 @@ export default function PartyPage() {
                             shadow-2xl
                             "
                         />
-
                     </div>
 
-                    <h3 className="text-white text-2xl mt-8 font-SadFont">
+                    <h3 className="text-white text-2xl mt-8 font-monoton">
                         {currentSong.title}
                     </h3>
 
-                    <p className="text-white/60 mt-2 font-SadFont">
+                    <p className="text-white/60 mt-2 font-monoton">
                         {currentSong.artist}
                     </p>
 
-
                     <div className="w-full mt-10">
-
                         <input
                             type="range"
                             min={0}
@@ -689,12 +743,9 @@ export default function PartyPage() {
                             <span>{formatTime(progress)}</span>
                             <span>{formatTime(duration)}</span>
                         </div>
-
                     </div>
 
-
                     <div className="flex items-center justify-center gap-8 mt-10">
-
                         <button
                             onClick={previousSong}
                             className="hover:scale-110 transition"
@@ -731,17 +782,16 @@ export default function PartyPage() {
                                 className="w-10"
                             />
                         </button>
-
                     </div>
-
                 </div>
             </div>
 
+            {/* EXIT BUTTON */}
             <button
                 onClick={() => navigate("/")}
                 className="
                 fixed
-                font-SadFont
+                font-monoton
                 bottom-6
                 left-6
                 z-50
@@ -759,11 +809,9 @@ export default function PartyPage() {
                 ← Exit the mode
             </button>
 
-
-            <h2 className="fixed bottom-17 left-8 z-50 text-xs text-white/60 font-SadFont">
+            <h2 className="fixed bottom-17 left-8 z-50 text-xs text-white/60 font-monoton">
                 Press F11 for better experience
             </h2>
-
         </div>
     );
 }

@@ -181,6 +181,30 @@ export default function DreamPage() {
                     border-radius: 0;
                     cursor: pointer;
                 }
+
+                /* ---------- PLAYLIST SCROLLBAR (scoped to the playlist list only) ---------- */
+
+                .playlist-scroll {
+                    scrollbar-width: thin;
+                    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+                }
+
+                .playlist-scroll::-webkit-scrollbar {
+                    width: 6px;
+                }
+
+                .playlist-scroll::-webkit-scrollbar-track {
+                    background: transparent;
+                }
+
+                .playlist-scroll::-webkit-scrollbar-thumb {
+                    background: rgba(255, 255, 255, 0.25);
+                    border-radius: 999px;
+                }
+
+                .playlist-scroll::-webkit-scrollbar-thumb:hover {
+                    background: rgba(255, 255, 255, 0.4);
+                }
             `}</style>
 
             {/* Background Video */}
@@ -278,13 +302,13 @@ export default function DreamPage() {
                     ☰
                 </button>
 
-                <div className="p-8">
+                <div className="p-8 h-full flex flex-col">
 
-                    <h2 className="text-white text-3xl mb-8 font-CormorantGaramond">
+                    <h2 className="text-white text-3xl mb-8 shrink-0 font-CormorantGaramond">
                         Dream Playlist
                     </h2>
 
-                    <div className="space-y-4 font-CormorantGaramond">
+                    <div className="space-y-4 font-CormorantGaramond flex-1 min-h-0 overflow-y-auto pr-2 playlist-scroll">
 
                         {songs.map((song, index) => (
                             <button
