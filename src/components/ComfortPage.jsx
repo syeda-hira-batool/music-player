@@ -492,7 +492,7 @@ export default function ComfortPage() {
 
             <button
                 onClick={() => navigate("/")}
-                className="
+                className={`
                 fixed
                 font-QuickSand
                 bottom-6
@@ -505,15 +505,37 @@ export default function ComfortPage() {
                 text-white
                 text-sm
                 backdrop-blur-xl
-                opacity-60
-                hover:opacity-100
-                "
+                transition-all
+                duration-300
+                ${
+                    playlistOpen
+                        ? "opacity-0 pointer-events-none -translate-x-4"
+                        : "opacity-60 hover:opacity-100"
+                }
+                `}
             >
                ← Exit the mode
             </button>
 
 
-            <h2 className="fixed bottom-17 left-8 z-50 text-xs text-white/60 font-QuickSand">
+            <h2
+                className={`
+                fixed
+                bottom-17
+                left-8
+                z-50
+                text-xs
+                text-white/60
+                font-QuickSand
+                transition-all
+                duration-300
+                ${
+                    playlistOpen
+                        ? "opacity-0 pointer-events-none -translate-x-4"
+                        : "opacity-100"
+                }
+                `}
+            >
                 Press F11 for a better experience
             </h2>
 

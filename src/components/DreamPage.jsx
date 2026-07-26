@@ -4,11 +4,11 @@ import { useRef, useState } from "react";
 import dreamBackground from "../assets/dream-background.mp4";
 
 import OurSummer from "../assets/OurSummer.mp3";
-import Ghosting from "../assets/Ghosting.mp3";
+import Mikrokosmos from "../assets/Mikrokosmos.mp3";
 import BlueHour from "../assets/BlueHour.mp3";
 
 import OurSummerCover from "../assets/OurSummer.png";
-import GhostingCover from "../assets/Ghosting.jfif";
+import MikrokosmosCover from "../assets/MikrokosmosCover.jfif";
 import BlueHourCover from "../assets/BlueHour.jfif";
 
 import BackButton from "../assets/backButton.png";
@@ -27,10 +27,10 @@ const songs = [
         cover: OurSummerCover,
     },
     {
-        title: "Ghosting",
-        artist: "Tomorrow X Together",
-        audio: Ghosting,
-        cover: GhostingCover,
+        title: "Mikrokosmos",
+        artist: "BTS",
+        audio: Mikrokosmos,
+        cover: MikrokosmosCover,
     },
     {
         title: "Blue Hour",
@@ -486,7 +486,7 @@ export default function DreamPage() {
 
             <button
                 onClick={() => navigate("/")}
-                className="
+                className={`
                 fixed
                 font-CormorantGaramond
                 bottom-6
@@ -499,15 +499,37 @@ export default function DreamPage() {
                 text-white
                 text-sm
                 backdrop-blur-xl
-                opacity-60
-                hover:opacity-100
-                "
+                transition-all
+                duration-300
+                ${
+                    playlistOpen
+                        ? "opacity-0 pointer-events-none -translate-x-4"
+                        : "opacity-60 hover:opacity-100"
+                }
+                `}
             >
                 ← Exit the mode
             </button>
 
 
-            <h2 className="fixed bottom-17 left-8 z-50 text-xs text-white/60 font-CormorantGaramond">
+            <h2
+                className={`
+                fixed
+                bottom-17
+                left-8
+                z-50
+                text-xs
+                text-white/60
+                font-CormorantGaramond
+                transition-all
+                duration-300
+                ${
+                    playlistOpen
+                        ? "opacity-0 pointer-events-none -translate-x-4"
+                        : "opacity-100"
+                }
+                `}
+            >
                 Press F11 for a better experience
             </h2>
 

@@ -3,14 +3,14 @@ import { useRef, useState } from "react";
 
 import joyBackground from "../assets/joy-background.mp4";
 
-import OurSummer from "../assets/OurSummer.mp3";
-import Ghosting from "../assets/Ghosting.mp3";
-import BlueHour from "../assets/BlueHour.mp3";
+import YesOrNo from "../assets/YesOrNo.mp3";
+import WhatYouWant from "../assets/WhatYouWant.mp3";
+import Mikrokosmos from "../assets/Mikrokosmos.mp3";
 import AboutYou from "../assets/AboutYou.mp3";
 
-import OurSummerCover from "../assets/OurSummer.png";
-import GhostingCover from "../assets/Ghosting.jfif";
-import BlueHourCover from "../assets/BlueHour.jfif";
+import YesOrNoCover from "../assets/YesOrNoCover.png";
+import WhatYouWantCover from "../assets/WhatYouWantCover.jfif";
+import MikrokosmosCover from "../assets/MikrokosmosCover.jfif";
 import AboutYouCover from "../assets/AboutYou.jfif";
 
 import BackButton from "../assets/backButton.png";
@@ -22,22 +22,22 @@ import cd from "../assets/cd.png";
 
 const songs = [
     {
-        title: "Our Summer",
-        artist: "Tomorrow X Together",
-        audio: OurSummer,
-        cover: OurSummerCover,
+        title: "Yes Or No",
+        artist: "Jungkook",
+        audio: YesOrNo,
+        cover: YesOrNoCover,
     },
     {
-        title: "Ghosting",
-        artist: "Tomorrow X Together",
-        audio: Ghosting,
-        cover: GhostingCover,
+        title: "What You Want",
+        artist: "Cortis",
+        audio: WhatYouWant,
+        cover: WhatYouWantCover,
     },
     {
-        title: "Blue Hour",
-        artist: "Tomorrow X Together",
-        audio: BlueHour,
-        cover: BlueHourCover,
+        title: "Mikrokosmos",
+        artist: "BTS",
+        audio: Mikrokosmos,
+        cover: MikrokosmosCover,
     },
     {
         title: "About You",
@@ -491,7 +491,7 @@ export default function JoyPage() {
 
             <button
                 onClick={() => navigate("/")}
-                className="
+                className={`
                 fixed
                 font-fredoka
                 bottom-6
@@ -504,15 +504,37 @@ export default function JoyPage() {
                 text-white
                 text-sm
                 backdrop-blur-xl
-                opacity-60
-                hover:opacity-100
-                "
+                transition-all
+                duration-300
+                ${
+                    playlistOpen
+                        ? "opacity-0 pointer-events-none -translate-x-4"
+                        : "opacity-60 hover:opacity-100"
+                }
+                `}
             >
                 ← Exit the mode
             </button>
 
 
-            <h2 className="fixed bottom-17 left-8 z-50 text-xs text-white/60 font-fredoka">
+            <h2
+                className={`
+                fixed
+                bottom-17
+                left-8
+                z-50
+                text-xs
+                text-white/60
+                font-fredoka
+                transition-all
+                duration-300
+                ${
+                    playlistOpen
+                        ? "opacity-0 pointer-events-none -translate-x-4"
+                        : "opacity-100"
+                }
+                `}
+            >
                 Press F11 for a better experience
             </h2>
 

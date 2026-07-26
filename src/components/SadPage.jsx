@@ -5,12 +5,12 @@ import sadBackground from "../assets/sad-background.mp4";
 
 import OverFlow from "../assets/OverFlow.mp3";
 import Ghosting from "../assets/Ghosting.mp3";
-import BlueHour from "../assets/BlueHour.mp3";
+import NeverLetGo from "../assets/NeverLetGo.mp3";
 import AboutYou from "../assets/AboutYou.mp3";
 
 import RideOrDieCover from "../assets/RideOrDieCover.jfif";
 import GhostingCover from "../assets/Ghosting.jfif";
-import BlueHourCover from "../assets/BlueHour.jfif";
+import NeverLetGoCover from "../assets/NeverLetGoCover.jfif";
 import AboutYouCover from "../assets/AboutYou.jfif";
 
 import BackButton from "../assets/backButton.png";
@@ -34,10 +34,10 @@ const songs = [
         cover: GhostingCover,
     },
     {
-        title: "Blue Hour",
-        artist: "Tomorrow X Together",
-        audio: BlueHour,
-        cover: BlueHourCover,
+        title: "Never Let Go",
+        artist: "lngshot",
+        audio: NeverLetGo,
+        cover: NeverLetGoCover,
     },
     {
         title: "About You",
@@ -491,7 +491,7 @@ export default function SadPage() {
 
             <button
                 onClick={() => navigate("/")}
-                className="
+                className={`
                 fixed
                 font-SadFont
                 bottom-6
@@ -504,15 +504,37 @@ export default function SadPage() {
                 text-white
                 text-sm
                 backdrop-blur-xl
-                opacity-60
-                hover:opacity-100
-                "
+                transition-all
+                duration-300
+                ${
+                    playlistOpen
+                        ? "opacity-0 pointer-events-none -translate-x-4"
+                        : "opacity-60 hover:opacity-100"
+                }
+                `}
             >
                 ← Exit the mode
             </button>
 
 
-            <h2 className="fixed bottom-17 left-8 z-50 text-xs text-white/60 font-SadFont">
+            <h2
+                className={`
+                fixed
+                bottom-17
+                left-8
+                z-50
+                text-xs
+                text-white/60
+                font-SadFont
+                transition-all
+                duration-300
+                ${
+                    playlistOpen
+                        ? "opacity-0 pointer-events-none -translate-x-4"
+                        : "opacity-100"
+                }
+                `}
+            >
                 Press F11 for a better experience
             </h2>
 

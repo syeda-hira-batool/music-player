@@ -533,7 +533,7 @@ export default function PartyPage() {
                 id="hs-run-on-click-run-confetti"
                 onClick={launchConfetti}
                 aria-label="Blow confetti"
-                className="
+                className={`
                 fixed
                 top-6
                 right-6
@@ -552,8 +552,14 @@ export default function PartyPage() {
                 justify-center
                 hover:scale-110
                 active:scale-95
-                transition
-                "
+                transition-all
+                duration-300
+                ${
+                    playerOpen
+                        ? "opacity-0 pointer-events-none translate-x-4"
+                        : "opacity-100"
+                }
+                `}
             >
                 🎉
             </button>
@@ -798,7 +804,7 @@ export default function PartyPage() {
             {/* EXIT BUTTON */}
             <button
                 onClick={() => navigate("/")}
-                className="
+                className={`
                 fixed
                 font-monoton
                 bottom-6
@@ -811,14 +817,36 @@ export default function PartyPage() {
                 text-white
                 text-sm
                 backdrop-blur-xl
-                opacity-60
-                hover:opacity-100
-                "
+                transition-all
+                duration-300
+                ${
+                    playlistOpen
+                        ? "opacity-0 pointer-events-none -translate-x-4"
+                        : "opacity-60 hover:opacity-100"
+                }
+                `}
             >
                 ← Exit the mode
             </button>
 
-            <h2 className="fixed bottom-17 left-8 z-50 text-xs text-white/60 font-monoton">
+            <h2
+                className={`
+                fixed
+                bottom-17
+                left-8
+                z-50
+                text-xs
+                text-white/60
+                font-monoton
+                transition-all
+                duration-300
+                ${
+                    playlistOpen
+                        ? "opacity-0 pointer-events-none -translate-x-4"
+                        : "opacity-100"
+                }
+                `}
+            >
                 Press F11 for better a experience
             </h2>
         </div>
