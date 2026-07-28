@@ -2,7 +2,10 @@
 
 A modern and interactive music player built with **React**, **JavaScript**, **Tailwind CSS**, and **Vite**. This project focuses on creating an engaging music experience with a responsive interface, dynamic themes, and smooth audio controls.
 
-![Music Player Demo](./music-player.gif)
+<p align="center">
+  <img src="./music-player.gif" alt="Football Penalty Game Demo" width="750"/>
+</p>
+
 
 ##  Features
 
