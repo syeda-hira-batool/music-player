@@ -1,6 +1,6 @@
 # 🎵 ZeeM – Aesthetic Music Player
 
-## Home
+## Home:
 
 <p align="center">
 <img src="./readmes/readme1.PNG" width="100%">
@@ -12,7 +12,7 @@
 
 ---
 
-## Features
+## Features:
 
 - Six immersive music modes
   - Dreaminess
@@ -35,9 +35,9 @@
 
 ---
 
-# Preview
+# Preview:
 
-## Party Mode
+## Party Mode:
 
 <p align="center">
 <img src="./readmes/readme7.PNG" width="100%">
@@ -45,7 +45,7 @@
 
 ---
 
-## Sad Mode
+## Sad Mode:
 
 <p align="center">
 <img src="./readmes/readme8.PNG" width="100%">
@@ -53,7 +53,7 @@
 
 ---
 
-## Cozy Mode
+## Cozy Mode:
 
 <p align="center">
 <img src="./readmes/readme9.PNG" width="100%">
@@ -61,7 +61,7 @@
 
 ---
 
-## Dreaminess Mode
+## Dreaminess Mode:
 
 <p align="center">
 <img src="./readmes/readme5.PNG" width="100%">
@@ -69,7 +69,7 @@
 
 ---
 
-## Joy Mode
+## Joy Mode:
 
 <p align="center">
 <img src="./readmes/readme6.PNG" width="100%">
@@ -77,7 +77,7 @@
 
 ---
 
-## 🤍 Comfort Mode
+## Comfort Mode:
 
 <p align="center">
 <img src="./readmes/readme10.PNG" width="100%">
@@ -85,7 +85,7 @@
 
 ---
 
-## Artist Search
+## Artist Search:
 
 <p align="center">
 <img src="./readmes/readme2.PNG" width="100%">
@@ -93,7 +93,7 @@
 
 ---
 
-## Song Search
+## Song Search:
 
 <p align="center">
 <img src="./readmes/readme3.PNG" width="100%">
@@ -101,7 +101,7 @@
 
 ---
 
-## Navigation & Information
+## Navigation & Information:
 
 <p align="center">
 <img src="./readmes/readme4.PNG" width="100%">
@@ -109,7 +109,7 @@
 
 ---
 
-## Behind the Project
+## Behind the Project:
 
 <p align="center">
 <img src="./readmes/readme11.PNG" width="100%">
@@ -117,7 +117,7 @@
 
 ---
 
-# Built With
+# Built With:
 
 - React
 - JavaScript (ES6+)
@@ -131,7 +131,7 @@
 
 ---
 
-# React Concepts Used
+# React Concepts Used:
 
 - React Components
 - Component Composition
@@ -148,7 +148,7 @@
 
 ---
 
-# Project Goals
+# Project Goals:
 
 This project was built to:
 
@@ -162,7 +162,7 @@ This project was built to:
 
 ---
 
-# Installation
+# Installation:
 
 Clone the repository
 
@@ -190,7 +190,7 @@ npm run dev
 
 ---
 
-# Future Improvements
+# Future Improvements:
 
 - Spotify integration
 - Music recommendations
@@ -205,7 +205,7 @@ npm run dev
 
 ---
 
-# Author
+# Author:
 
 **Syeda Hira Batool**
 
