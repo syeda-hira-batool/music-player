@@ -1,7 +1,9 @@
 # 🎵 ZeeM – Aesthetic Music Player
 
+## Home
+
 <p align="center">
-  <img src="./readmes/readme1" alt="ZeeM Demo" width="100%">
+<img src="./readmes/readme1.PNG" width="100%">
 </p>
 
 <p align="center">
@@ -34,14 +36,6 @@
 ---
 
 # Preview
-
-## Home
-
-<p align="center">
-<img src="./readmes/readme1.PNG" width="100%">
-</p>
-
----
 
 ## Party Mode
 
