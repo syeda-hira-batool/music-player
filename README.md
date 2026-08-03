@@ -1,7 +1,7 @@
 # 🎵 ZeeM – Aesthetic Music Player
 
 <p align="center">
-  <img src="./readmes/music-player.gif" alt="ZeeM Demo" width="100%">
+  <img src="./readmes/readme1" alt="ZeeM Demo" width="100%">
 </p>
 
 <p align="center">
@@ -46,7 +46,7 @@
 ## Party Mode
 
 <p align="center">
-<img src="./readmes/readme2.PNG" width="100%">
+<img src="./readmes/readme7.PNG" width="100%">
 </p>
 
 ---
@@ -54,7 +54,7 @@
 ## Sad Mode
 
 <p align="center">
-<img src="./readmes/readme3.PNG" width="100%">
+<img src="./readmes/readme8.PNG" width="100%">
 </p>
 
 ---
@@ -62,7 +62,7 @@
 ## Cozy Mode
 
 <p align="center">
-<img src="./readmes/readme4.PNG" width="100%">
+<img src="./readmes/readme9.PNG" width="100%">
 </p>
 
 ---
@@ -86,7 +86,7 @@
 ## 🤍 Comfort Mode
 
 <p align="center">
-<img src="./readmes/readme7.PNG" width="100%">
+<img src="./readmes/readme10.PNG" width="100%">
 </p>
 
 ---
@@ -94,7 +94,7 @@
 ## Artist Search
 
 <p align="center">
-<img src="./readmes/readme8.PNG" width="100%">
+<img src="./readmes/readme2.PNG" width="100%">
 </p>
 
 ---
@@ -102,7 +102,7 @@
 ## Song Search
 
 <p align="center">
-<img src="./readmes/readme9.PNG" width="100%">
+<img src="./readmes/readme3.PNG" width="100%">
 </p>
 
 ---
@@ -110,7 +110,7 @@
 ## Navigation & Information
 
 <p align="center">
-<img src="./readmes/readme10.PNG" width="100%">
+<img src="./readmes/readme4.PNG" width="100%">
 </p>
 
 ---
