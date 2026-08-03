@@ -6,6 +6,7 @@ Route,
 useLocation,
 useNavigate
 } from "react-router-dom";
+import './index.css'
 
 import NavBar from "./components/NavBar";
 import MyFooter from "./components/MyFooter";
@@ -69,8 +70,8 @@ return (
         <main
             className={
                 isMoodMode
-                    ? "flex-1"
-                    : "flex-1 pt-8"
+                    ? "flex-1 flex flex-col"
+                    : "flex-1 pt-8 flex flex-col"
             }
         >
             <Routes>

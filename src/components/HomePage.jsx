@@ -3,6 +3,7 @@ import danceGif from "../assets/dance.gif";
 
 export default function HomePage({ isHovered, isOpen }) {
     return (
+         <div className="music-bg">
         <div className="flex flex-col items-center justify-center py-7 px-6">
 
             <h1 className="text-[#CD2C58] pb-6 font-bold font-puff text-6xl text-center">
@@ -35,5 +36,7 @@ export default function HomePage({ isHovered, isOpen }) {
             )}
 
         </div>
+        </div>
     );
 }
+

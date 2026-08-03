@@ -3,6 +3,7 @@ import { useState } from "react";
 import catDance2Gif from "../assets/cat2.gif";
 
 export default function InfoPage() {
+        
     const [search, setSearch] = useState("");
     const [artist, setArtist] = useState("");
     const [mode, setMode] = useState("artist"); // "artist" | "song" needs both
@@ -105,6 +106,7 @@ export default function InfoPage() {
     };
 
     return (
+        <div className="music-bg">
         <div className="p-6 pt-3 flex flex-col items-center gap-5">
 
             <div className="flex flex-col items-center justify-center w-full max-w-2xl">
@@ -230,5 +232,6 @@ export default function InfoPage() {
             </div>
 
         </div>
+    </div>   
     );
 }

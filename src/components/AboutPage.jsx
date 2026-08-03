@@ -85,8 +85,11 @@ const concepts = [
     },
 ];
 
+
+
 export default function AboutPage() {
     return (
+        <div className="music-bg">
         <div className="px-6 py-10 sm:px-12">
             <h1 className="text-[#CD2C58] font-puff font-bold text-5xl sm:text-6xl text-center pb-3">
                 Every Feature I Used
@@ -110,6 +113,7 @@ export default function AboutPage() {
                     </div>
                 ))}
             </div>
+        </div>
         </div>
     );
 }

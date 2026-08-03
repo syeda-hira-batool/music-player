@@ -16,4 +16,55 @@
 
 body {
     background: #FFC4C4;
+    height: 100%;
+}
+
+html, #root {
+    height: 100%;
+}
+
+.music-bg {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+}
+
+.music-bg::before,
+.music-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-repeat: repeat;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='340' viewBox='0 0 260 340'%3E%3Ctext x='20' y='60' font-size='38' font-family='sans-serif' fill='%237A3B3B' fill-opacity='0.35' transform='rotate(-10 20 60)'%3E%E2%99%AA%3C/text%3E%3Ctext x='150' y='40' font-size='28' font-family='sans-serif' fill='%237A3B3B' fill-opacity='0.28' transform='rotate(12 150 40)'%3E%E2%99%AB%3C/text%3E%3Ctext x='70' y='170' font-size='30' font-family='sans-serif' fill='%237A3B3B' fill-opacity='0.3' transform='rotate(6 70 170)'%3E%E2%99%AB%3C/text%3E%3Ctext x='200' y='150' font-size='24' font-family='sans-serif' fill='%237A3B3B' fill-opacity='0.25' transform='rotate(-14 200 150)'%3E%E2%99%AA%3C/text%3E%3Ctext x='30' y='280' font-size='26' font-family='sans-serif' fill='%237A3B3B' fill-opacity='0.3' transform='rotate(9 30 280)'%3E%E2%99%AA%3C/text%3E%3Ctext x='170' y='300' font-size='34' font-family='sans-serif' fill='%237A3B3B' fill-opacity='0.3' transform='rotate(-8 170 300)'%3E%E2%99%AB%3C/text%3E%3C/svg%3E");
+    background-size: 260px 340px;
+    animation: music-notes-drift 45s linear infinite;
+}
+
+.music-bg::after {
+    background-size: 180px 240px;
+    opacity: 0.6;
+    animation-duration: 30s;
+}
+
+@keyframes music-notes-drift {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 0 -1000px;
+    }
+}
+
+.music-bg > * {
+    position: relative;
+    z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .music-bg::before,
+    .music-bg::after {
+        animation: none;
+    }
 }
